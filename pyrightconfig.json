@@ -1,0 +1,20 @@
+{
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "**/__pycache__",
+        "**/node_modules",
+        "**/.*",
+        ".venv"
+    ],
+    "venvPath": ".",
+    "venv": ".venv",
+    "typeCheckingMode": "strict",
+    "reportMissingImports": true,
+    "reportMissingTypeStubs": false,
+    "reportOptionalMemberAccess": true,
+    "reportOptionalCall": true,
+    "reportOptionalSubscript": true,
+    "reportGeneralTypeIssues": true
+}
