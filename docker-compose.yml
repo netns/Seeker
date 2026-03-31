@@ -1,0 +1,36 @@
+services:
+  seeker-db:
+    image: mariadb:11.4
+    container_name: seeker-db
+    environment:
+      MARIADB_DATABASE: seeker
+      MARIADB_USER: seeker
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_RANDOM_ROOT_PASSWORD: "1"
+    volumes:
+      - seeker-db-data:/var/lib/mysql
+    networks:
+      - seeker-net
+    restart: unless-stopped
+
+  seeker-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: seeker-bot
+    depends_on:
+      - seeker-db
+    env_file:
+      - .env
+    environment:
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+    networks:
+      - seeker-net
+    restart: unless-stopped
+
+volumes:
+  seeker-db-data:
+
+networks:
+  seeker-net:
+    driver: bridge
